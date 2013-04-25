@@ -17,23 +17,18 @@
 
 package org.aerogear.connectivity.service;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.Sender;
+import com.notnoop.apns.APNS;
+import com.notnoop.apns.ApnsService;
 import org.aerogear.connectivity.model.AndroidApplication;
 import org.aerogear.connectivity.model.MobileApplicationInstance;
 import org.aerogear.connectivity.model.PushApplication;
 import org.aerogear.connectivity.model.iOSApplication;
 
-import com.google.android.gcm.server.Message;
-import com.google.android.gcm.server.Sender;
-import com.notnoop.apns.APNS;
-import com.notnoop.apns.ApnsService;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.*;
 
 public class SenderServiceImpl implements SenderService {
 
@@ -91,6 +86,7 @@ public class SenderServiceImpl implements SenderService {
                     // could submitted, on the payload... -
                     // but hard coded for testing...
                     // (no meaning,here...)
+                    .addData("message",jsonMessage.get("message")) //this will show in the android notification center
                     .addData("title", "FOOOOO") 
                     .build();
 
