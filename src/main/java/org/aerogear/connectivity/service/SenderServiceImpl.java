@@ -57,6 +57,8 @@ public class SenderServiceImpl implements SenderService {
 
             String msg = APNS.newPayload()
                     .alertBody(jsonMessage.get("alert")) // payload from the message....
+                    .customField("title",jsonMessage.get("title"))
+                    .customField("id", jsonMessage.get("id"))
                     .badge(2) // could submitted, on the payload - but hard coded for testing...
                     .sound("default") // could submitted, on the payload - but hard coded for testing...
                     .build();
@@ -86,8 +88,9 @@ public class SenderServiceImpl implements SenderService {
                     // could submitted, on the payload... -
                     // but hard coded for testing...
                     // (no meaning,here...)
-                    .addData("message",jsonMessage.get("message")) //this will show in the android notification center
-                    .addData("title", "FOOOOO") 
+                    .addData("message",jsonMessage.get("alert")) //this will show in the android notification center
+                    .addData("title", jsonMessage.get("title"))
+                    .addData("id", jsonMessage.get("id"))
                     .build();
 
             // send it out.....
